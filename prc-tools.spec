@@ -29,6 +29,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # This is the canonical place to look for Palm OS-related header files and
 # such on Unix-like file systems.
 %define palmdev_prefix /opt/palmdev
+%define	no_install_post_strip	1
 
 %description
 A complete compiler tool chain for building Palm OS applications in C
@@ -135,7 +136,6 @@ LDFLAGS=-L`pwd`/static-libs ./configure \
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir} \
 	--infodir=%{_infodir} \
-	--with-headers=empty \
 	--disable-generic
 
 %{__make}
@@ -143,7 +143,15 @@ LDFLAGS=-L`pwd`/static-libs ./configure \
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
-	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
+	DESTDIR=$RPM_BUILD_ROOT \
+	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
+	tooldir=$RPM_BUILD_ROOT%{_prefix} \
+	mandir=$RPM_BUILD_ROOT%{_mandir} \
+	infodir=$RPM_BUILD_ROOT%{_infodir} \
+	includedir=$RPM_BUILD_ROOT%{_includedir} \
+	libdir=$RPM_BUILD_ROOT%{_libdir}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
