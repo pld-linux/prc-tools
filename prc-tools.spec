@@ -1,24 +1,27 @@
 Summary:	GCC and related tools for Palm OS development
 Summary(pl):	GCC i zwi±zane z nim narzêdzia do programowania pod Palm OS
 Name:		prc-tools
-Version:	2.2
-%define	bver	2.12.1
-%define	dver	5.0
-%define	cver	2.95.3
-%define	mver	3.79.1
-Release:	1
+Version:	2.3
+%define	bver	2.14
+%define	dver	5.3
+%define	cver	3.3.1
+%define	cver295	2.95.3
+%define	mver	3.80
+Release:	0.1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	91a9a04d2042fcf673ff212a3ffd7ab9
+# Source0-md5:	038a42a71a984fee6f906abc85a032ec
 Source1:	ftp://sources.redhat.com/pub/binutils/releases/binutils-%{bver}.tar.bz2
-# Source1-md5:	f67fe2e8065c5683bc34782de131f5d3
-Source2:	ftp://sourceware.cygnus.com/pub/gdb/old-releases/gdb-%{dver}.tar.bz2
-# Source2-md5:	b2720def719fd024e380793d9084da2a
+# Source1-md5:	2da8def15d28af3ec6af0982709ae90a
+Source2:	ftp://ftp.gnu.org/pub/gnu/gdb/gdb-%{dver}.tar.gz
+# Source2-md5:	1e8566325f222edfbdd93e40c6ae921b
 Source3:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver}/gcc-%{cver}.tar.bz2
-# Source3-md5:	87ee083a830683e2aaa57463940a0c3c
-Source4:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
-# Source4-md5:	22ea95c125c7b80e04354d4ee4ae960d
+# Source3-md5:	1135a104e9fa36fdf7c663598fab5c40
+Source4:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver295}/gcc-%{cver295}.tar.bz2
+# Source4-md5:	87ee083a830683e2aaa57463940a0c3c
+Source5:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
+# Source5-md5:	c68540da9302a48068d5cce1f0099477
 URL:		http://prc-tools.sourceforge.net/
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -89,25 +92,30 @@ Ten opcjonalny pakiet jest dla preferuj±cych dokumentacjê w formacie
 HTML.
 
 %prep
-%setup -q -n binutils-2.12.1 -T -b 1
-%setup -q -n gdb-5.0 -T -b 2
-%setup -q -n gcc-2.95.3 -T -b 3
-%setup -q -n make-3.79.1 -T -b 4
+%setup -q -n binutils-%{bver} -T -b 1
+%setup -q -n gdb-%{dver} -T -b 2
+%setup -q -n gcc-%{cver} -T -b 3
+%setup -q -n gcc-%{cver295} -T -b 4
+%setup -q -n make-%{mver} -T -b 5
 %setup -q
 
-cat *.palmos.diff | (cd .. && patch -p0)
+cat 	binutils-%{bver}.palmos.diff \
+	gdb-%{dver}.palmos.diff \
+	gcc-%{cver}.palmos.diff \
+	gcc-%{cver295}.palmos.diff \
+	| (cd .. && patch -p0)
 
-mv ../binutils-2.12.1 binutils
-mv ../gdb-5.0 gdb
-mv ../gcc-2.95.3 gcc
-mv ../make-3.79.1 make
+mv ../binutils-%{bver} binutils
+mv ../gdb-%{dver} gdb
+mv ../gcc-%{cver} gcc
+mv ../gcc-%{cver295} gcc295
 
 # The patch touches a file this depends on, and you need autoconf to remake
 # it.  There's no changes, so let's just touch it so people don't have to
 # have autoconf installed.
 touch gcc/gcc/cstamp-h.in
 
-mkdir static-libs
+install -d static-libs empty
 
 %build
 # Ensure that we link *statically* against the stdc++ library
@@ -120,22 +128,21 @@ ln -s `${CXX:-g++} -print-file-name=libstdc++.a` static-libs/libstdc++.a
 # We can't use %%configure because it insists on libtoolizing, which will
 # likely break our config.sub.
 LDFLAGS=-L`pwd`/static-libs ./configure \
-  --enable-targets=m68k-palmos,arm-palmos \
-  --enable-languages=c,c++ \
-  --with-palmdev-prefix=%{palmdev_prefix} \
-  --enable-html-docs=%{palmdev_prefix}/doc \
-  --prefix=%{_prefix} --exec-prefix=%{_exec_prefix} \
-  --bindir=%{_bindir} --sbindir=%{_sbindir} --libexecdir=%{_libexecdir} \
-  --localstatedir=%{_localstatedir} --sharedstatedir=%{_sharedstatedir} \
-  --sysconfdir=%{_sysconfdir} --datadir=%{_datadir} \
-  --includedir=%{_includedir} --libdir=%{_libdir} \
-  --mandir=%{_mandir} --infodir=%{_infodir}
+	--enable-targets=m68k-palmos,arm-palmos \
+	--enable-languages=c,c++ \
+	--with-palmdev-prefix=%{palmdev_prefix} \
+	--enable-html-docs=%{palmdev_prefix}/doc \
+	--prefix=%{_prefix} \
+	--mandir=%{_mandir} \
+	--infodir=%{_infodir} \
+	--with-headers=empty \
+	--disable-generic
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall \
+%{__make} install \
 	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
 
 %clean
