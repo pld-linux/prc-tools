@@ -7,7 +7,7 @@ Version:	2.3
 %define	cver	3.3.1
 %define	cver295	2.95.3
 %define	mver	3.80
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
@@ -151,6 +151,16 @@ rm -rf $RPM_BUILD_ROOT
 	libdir=$RPM_BUILD_ROOT%{_libdir} \
 	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
 
+for i in arm-palmos m68k-palmos; do
+for j in as ld; do
+	ln -sf %{_bindir}/$i-$j $RPM_BUILD_ROOT%{_libdir}/gcc-lib/$i/$j
+done;
+done;
+
+mv $RPM_BUILD_ROOT%{_libdir}/*.a $RPM_BUILD_ROOT%{_libdir}/arm-palmos/lib
+mv $RPM_BUILD_ROOT%{_libdir}/mown-gp/*.a $RPM_BUILD_ROOT%{_libdir}/m68k-palmos/lib
+mv $RPM_BUILD_ROOT%{_includedir}/* $RPM_BUILD_ROOT%{_libdir}/m68k-palmos/include
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -173,7 +183,11 @@ fi
 %doc README TODO
 %attr(755,root,root) %{_bindir}/m68k*
 %attr(755,root,root) %{_exec_prefix}/m68k*
-%{_libdir}/gcc-lib/m68k*
+%dir %{_libdir}/gcc-lib/m68k-palmos
+%dir %{_libdir}/gcc-lib/m68k-palmos/%{cver295}-kgpd
+%{_libdir}/gcc-lib/m68k-palmos/%{cver295}-kgpd/[ilms]*
+%attr(755,root,root) %{_libdir}/gcc-lib/m68k-palmos/%{cver295}-kgpd/c*
+%{_libdir}/gcc-lib/m68k-palmos/[al]*
 %{_libdir}/ldscripts/m68k*
 #%{_datadir}/prc-tools
 # Native packages provide gcc.info* etc, so we limit ourselves to this one
@@ -185,7 +199,13 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/arm*
 %attr(755,root,root) %{_exec_prefix}/arm*
-%{_libdir}/gcc-lib/arm*
+%dir %{_libdir}/gcc-lib/arm-palmos
+%dir %{_libdir}/gcc-lib/arm-palmos/%{cver}
+%{_libdir}/gcc-lib/arm-palmos/%{cver}/[tsli]*
+%attr(755,root,root) %{_libdir}/gcc-lib/arm-palmos/%{cver}/cc*
+%{_libdir}/gcc-lib/arm-palmos/[al]*
+%{_libdir}/gcc-lib/arm-palmos/%{cver}/c[co]*
+%{_libdir}/gcc-lib/arm-palmos/%{cver}/c*.o
 %{_libdir}/ldscripts/arm*
 %attr(755,root,root) %{_exec_prefix}/arm*
 
