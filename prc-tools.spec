@@ -143,15 +143,13 @@ LDFLAGS=-L`pwd`/static-libs ./configure \
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	tooldir=$RPM_BUILD_ROOT%{_prefix} \
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} \
 	includedir=$RPM_BUILD_ROOT%{_includedir} \
-	libdir=$RPM_BUILD_ROOT%{_libdir}
-
+	libdir=$RPM_BUILD_ROOT%{_libdir} \
+	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -173,12 +171,13 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README TODO
-%attr(755,root,root) %{_bindir}/[b-z]*
+%attr(755,root,root) %{_bindir}/m68k*
 %attr(755,root,root) %{_exec_prefix}/m68k*
 %{_libdir}/gcc-lib/m68k*
-%{_datadir}/prc-tools
+%{_libdir}/ldscripts/m68k*
+#%{_datadir}/prc-tools
 # Native packages provide gcc.info* etc, so we limit ourselves to this one
-%doc %{_infodir}/prc-tools*
+#%doc %{_infodir}/prc-tools*
 # Similarly, the native packages have already provided equivalent manpages
 #%doc %{_mandir}/man1/*
 
@@ -187,7 +186,9 @@ fi
 %attr(755,root,root) %{_bindir}/arm*
 %attr(755,root,root) %{_exec_prefix}/arm*
 %{_libdir}/gcc-lib/arm*
+%{_libdir}/ldscripts/arm*
+%attr(755,root,root) %{_exec_prefix}/arm*
 
 %files htmldocs
 %defattr(644,root,root,755)
-%doc %{palmdev_prefix}/doc
+#%doc %{palmdev_prefix}/doc
