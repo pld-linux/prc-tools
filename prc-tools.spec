@@ -10,11 +10,15 @@ Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
+# Source0-md5:	91a9a04d2042fcf673ff212a3ffd7ab9
 Source1:	ftp://sources.redhat.com/pub/binutils/releases/binutils-%{bver}.tar.bz2
+# Source1-md5:	f67fe2e8065c5683bc34782de131f5d3
 Source2:	ftp://sourceware.cygnus.com/pub/gdb/old-releases/gdb-%{dver}.tar.bz2
+# Source2-md5:	b2720def719fd024e380793d9084da2a
 Source3:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver}/gcc-%{cver}.tar.bz2
 # Source3-md5:	87ee083a830683e2aaa57463940a0c3c
 Source4:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
+# Source4-md5:	22ea95c125c7b80e04354d4ee4ae960d
 URL:		http://prc-tools.sourceforge.net/
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
