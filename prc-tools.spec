@@ -28,7 +28,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # This is the canonical place to look for Palm OS-related header files and
 # such on Unix-like file systems.
-%define palmdev_prefix /opt/palmdev
+%define	palmdev_prefix		/opt/palmdev
 %define	no_install_post_strip	1
 
 %description
