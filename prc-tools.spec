@@ -34,7 +34,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A complete compiler tool chain for building Palm OS applications in C
 or C++. Includes (patched versions of) binutils %{bver}, GDB %{dver},
-and GCC %{cver}, along with various post-linker tools to produce Palm
+and GCC %{cver295}, along with various post-linker tools to produce Palm
 OS .prc files.
 
 You will also need a Palm OS SDK and some way of creating resources,
