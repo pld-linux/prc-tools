@@ -13,6 +13,7 @@ Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
 Source1:	ftp://sources.redhat.com/pub/binutils/releases/binutils-%{bver}.tar.bz2
 Source2:	ftp://sourceware.cygnus.com/pub/gdb/old-releases/gdb-%{dver}.tar.bz2
 Source3:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver}/gcc-%{cver}.tar.bz2
+# Source3-md5:	87ee083a830683e2aaa57463940a0c3c
 Source4:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
 URL:		http://prc-tools.sourceforge.net/
 BuildRequires:	texinfo
