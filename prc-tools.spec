@@ -24,6 +24,7 @@ Source5:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
 # Source5-md5:	c68540da9302a48068d5cce1f0099477
 URL:		http://prc-tools.sourceforge.net/
 BuildRequires:	texinfo
+ExcludeArch:	amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # This is the canonical place to look for Palm OS-related header files and
