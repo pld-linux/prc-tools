@@ -7,7 +7,7 @@ Version:	2.3
 %define	cver	3.3.1
 %define	cver295	2.95.3
 %define	mver	3.80
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
