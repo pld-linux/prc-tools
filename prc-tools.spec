@@ -1,70 +1,94 @@
-Name: prc-tools
-# The version line is grepped for by configure.  It must be exactly
-# Version<colon><space><versionnumber><newline>
-Version: 2.2
-Release: 1
-Summary: GCC and related tools for Palm OS development
-License: GPL
-URL: http://prc-tools.sourceforge.net/
-Group: Development/Palm OS
-Source0: http://prdownloads.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
-Source1: ftp://sources.redhat.com/pub/binutils/releases/binutils-2.12.1.tar.bz2
-Source2: ftp://sources.redhat.com/pub/gdb/releases/gdb-5.0.tar.gz
-Source3: ftp://gcc.gnu.org/pub/gcc/releases/gcc-2.95.3/gcc-2.95.3.tar.gz
-Source4: ftp://ftp.gnu.org/pub/gnu/make/make-3.79.1.tar.gz
-NoSource: 1
-NoSource: 2
-NoSource: 3
-NoSource: 4
-BuildRoot: %{_tmppath}/%{name}-root
-BuildRequires: texinfo
+Summary:	GCC and related tools for Palm OS development
+Summary(pl):	GCC i zwi±zane z nim narzêdzia do programowania pod Palm OS
+Name:		prc-tools
+Version:	2.2
+%define	bver	2.12.1
+%define	dver	5.0
+%define	cver	2.95.3
+%define	mver	3.79.1
+Release:	1
+License:	GPL
+Group:		Development/Tools
+Source0:	http://prdownloads.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
+Source1:	ftp://sources.redhat.com/pub/binutils/releases/binutils-%{bver}.tar.bz2
+Source2:	ftp://sources.redhat.com/pub/gdb/releases/gdb-%{dver}.tar.gz
+Source3:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver}/gcc-%{cver}.tar.gz
+Source4:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
+URL:		http://prc-tools.sourceforge.net/
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	texinfo
 
 # This is the canonical place to look for Palm OS-related header files and
 # such on Unix-like file systems.
 %define palmdev_prefix /opt/palmdev
 
 %description
-A complete compiler tool chain for building Palm OS applications in C or C++.
-Includes (patched versions of) binutils 2.12.1, GDB 5.0, and GCC 2.95.3, along
-with various post-linker tools to produce Palm OS .prc files.
+A complete compiler tool chain for building Palm OS applications in C
+or C++. Includes (patched versions of) binutils %{bver}, GDB %{dver},
+and GCC %{cver}, along with various post-linker tools to produce Palm
+OS .prc files.
 
-You will also need a Palm OS SDK and some way of creating resources, such as
-PilRC.
+You will also need a Palm OS SDK and some way of creating resources,
+such as PilRC.
+
+%description -l pl
+Kompletny zestaw narzêdzi kompilatora do budowania aplikacji pod Palm
+OS w C lub C++. Zawiera zmodyfikowane wersje binutils %{bver}, GDB
+%{dver} i GCC %{cver}, wraz z ró¿nymi narzêdziami postkonsolidacyjnymi
+konsolidacji, aby stworzyæ pliki .prc dla Palm OS. Do tworzenia
+niektórych zasobów, takich jak PilRC, potrzebny jest jeszcze Palm OS
+SDK.
 
 %package arm
-Summary: GCC and related tools for ARM targeted Palm OS development
-Group: Development/Palm OS
-Requires: prc-tools >= 2.2
+Summary:	GCC and related tools for ARM targeted Palm OS development
+Summary(pl):	GCC i zwi±zane z nim narzêdzia dla ARM do programowania pod Palm OS
+Group:		Development/Tools
+Requires:	prc-tools >= 2.2
+
 %description arm
 A compiler tool chain for building Palm OS armlets in C or C++.
-Includes (patched versions of) binutils 2.12.1 and GCC 2.95.3, and requires
-the various post-linker tools from a corresponding prc-tools package.
+Includes (patched versions of) binutils %{bver} and GCC %{cver}, and
+requires the various post-linker tools from a corresponding prc-tools
+package.
 
-Note that this version of ARM prc-tools does not provide startup code or
-other niceties:  by itself, it is only useful for building stand-alone
-code resources such as armlets.
+Note that this version of ARM prc-tools does not provide startup code
+or other niceties: by itself, it is only useful for building
+stand-alone code resources such as armlets.
+
+%description arm -l pl
+Zestaw narzêdzi kompilatora do budowania armletów Palm OS w C lub C++.
+Zawiera zmodyfikowane wersje binutils %{bver} i GCC %{cver}, a wymaga
+ró¿nych narzêdzi postkonsolidacyjnych z pakietu prc-tools.
+
+Ta wersja narzêdzi ARM prc-tools nie dostarcza kodu startowego ani
+innych subtelno¶ci - jako taka jest przydatna tylko do budowania
+samodzielnych zasobów kodu, takich jak armlety.
 
 %package htmldocs
-Summary: GCC, GDB, binutils, make, and prc-tools documentation as HTML
-Group: Development/Palm OS
-Prefix: %{palmdev_prefix}
+Summary:	GCC, GDB, binutils, make, and prc-tools documentation as HTML
+Summary(pl):	Dokumentacja GCC, GDB, binutils, make i prc-tools w HTML
+Group:		Development/Tools
+
 %description htmldocs
 GCC, GDB, binutils, make, and general prc-tools documentation in HTML
-format.  The various native development packages and the main prc-tools
-package, respectively, provide exactly this documentation in info format.
-This optional package is for those who prefer HTML-formatted documentation.
+format. The various native development packages and the main prc-tools
+package, respectively, provide exactly this documentation in info
+format. This optional package is for those who prefer HTML-formatted
+documentation.
 
-By default, this package will be installed at %{palmdev_prefix}/doc, and
-you should point your web browser at %{palmdev_prefix}/doc/index.html.
-If you want to install it elsewhere, you can do so via the prefix and/or
-relocation facilities of your RPM installation tool.
+%description htmldocs -l pl
+Dokumentacja do GCC, GDB, binutils, make i ogólna dla prc-tools w
+formacie HTML. Ró¿ne pakiety do natywnego programowania oraz g³ówny
+pakiet prc-tools udostêpniaj± tê sam± dokumentacjê w formacie info.
+Ten opcjonalny pakiet jest dla preferuj±cych dokumentacjê w formacie
+HTML.
 
 %prep
-%setup -n binutils-2.12.1 -T -b 1
-%setup -n gdb-5.0 -T -b 2
-%setup -n gcc-2.95.3 -T -b 3
-%setup -n make-3.79.1 -T -b 4
-%setup
+%setup -q -n binutils-2.12.1 -T -b 1
+%setup -q -n gdb-5.0 -T -b 2
+%setup -q -n gcc-2.95.3 -T -b 3
+%setup -q -n make-3.79.1 -T -b 4
+%setup -q
 
 cat *.palmos.diff | (cd .. && patch -p0)
 
@@ -102,38 +126,35 @@ LDFLAGS=-L`pwd`/static-libs ./configure \
   --includedir=%{_includedir} --libdir=%{_libdir} \
   --mandir=%{_mandir} --infodir=%{_infodir}
 
-make
+%{__make}
 
 %install
-[ ${RPM_BUILD_ROOT:-/} != / ] && rm -rf $RPM_BUILD_ROOT
-%makeinstall htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
+rm -rf $RPM_BUILD_ROOT
+%makeinstall \
+	htmldir=$RPM_BUILD_ROOT%{palmdev_prefix}/doc
 
 %clean
-[ ${RPM_BUILD_ROOT:-/} != / ] && rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post
-# Given foo.info, install-info will check for both foo.info and foo.info.gz
-if /bin/sh -c 'install-info --version' >/dev/null 2>&1; then
-  install-info --info-dir=%{_infodir} %{_infodir}/prc-tools.info
-fi
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
 
 %preun
-if [ "$1" = 0 ]; then
-  if /bin/sh -c 'install-info --version' >/dev/null 2>&1; then
-    install-info --remove --info-dir=%{_infodir} %{_infodir}/prc-tools.info
-  fi
-  palmdev-prep --remove
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
+if [ "$1" = "0" ]; then
+	palmdev-prep --remove
 fi
 
 %preun arm
-if [ "$1" = 0 ]; then
-  rm -f %{_libdir}/gcc-lib/arm-palmos/specs
+if [ "$1" = "0" ]; then
+	rm -f %{_libdir}/gcc-lib/arm-palmos/specs
 fi
 
 %files
-%defattr(-, root, root)
-%{_bindir}/[b-z]*
-%{_exec_prefix}/m68k*
+%defattr(644,root,root,755)
+%doc COPYING README
+%attr(755,root,root) %{_bindir}/[b-z]*
+%attr(755,root,root) %{_exec_prefix}/m68k*
 %{_libdir}/gcc-lib/m68k*
 %{_datadir}/prc-tools
 # Native packages provide gcc.info* etc, so we limit ourselves to this one
@@ -141,14 +162,12 @@ fi
 # Similarly, the native packages have already provided equivalent manpages
 #%doc %{_mandir}/man1/*
 
-%doc COPYING README
-
 %files arm
-%defattr(-, root, root)
-%{_bindir}/arm*
-%{_exec_prefix}/arm*
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/arm*
+%attr(755,root,root) %{_exec_prefix}/arm*
 %{_libdir}/gcc-lib/arm*
 
 %files htmldocs
-%defattr(-, root, root)
+%defattr(644,root,root,755)
 %doc %{palmdev_prefix}/doc
