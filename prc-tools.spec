@@ -9,14 +9,14 @@ Version:	2.2
 Release:	1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://prdownloads.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
 Source1:	ftp://sources.redhat.com/pub/binutils/releases/binutils-%{bver}.tar.bz2
 Source2:	ftp://sourceware.cygnus.com/pub/gdb/old-releases/gdb-%{dver}.tar.bz2
 Source3:	ftp://gcc.gnu.org/pub/gcc/releases/gcc-%{cver}/gcc-%{cver}.tar.bz2
 Source4:	ftp://ftp.gnu.org/pub/gnu/make/make-%{mver}.tar.gz
 URL:		http://prc-tools.sourceforge.net/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	texinfo
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # This is the canonical place to look for Palm OS-related header files and
 # such on Unix-like file systems.
