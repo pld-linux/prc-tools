@@ -157,7 +157,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc README TODO
 %attr(755,root,root) %{_bindir}/[b-z]*
 %attr(755,root,root) %{_exec_prefix}/m68k*
 %{_libdir}/gcc-lib/m68k*
