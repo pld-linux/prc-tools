@@ -7,7 +7,7 @@ Version:	2.3
 %define	cver	3.3.1
 %define	cver295	2.95.3
 %define	mver	3.80
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/prc-tools/%{name}-%{version}.tar.gz
@@ -139,11 +139,11 @@ LDFLAGS=-L`pwd`/static-libs ./configure \
 	--infodir=%{_infodir} \
 	--disable-generic
 
-%{__make}
+%{__make} -j 1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
+%{__make} -j 1 install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	tooldir=$RPM_BUILD_ROOT%{_prefix} \
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
