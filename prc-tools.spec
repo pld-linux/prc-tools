@@ -157,9 +157,9 @@ for j in as ld; do
 done;
 done;
 
-mv $RPM_BUILD_ROOT%{_libdir}/*.a $RPM_BUILD_ROOT%{_libdir}/arm-palmos/lib
-mv $RPM_BUILD_ROOT%{_libdir}/mown-gp/*.a $RPM_BUILD_ROOT%{_libdir}/m68k-palmos/lib
-mv $RPM_BUILD_ROOT%{_includedir}/* $RPM_BUILD_ROOT%{_libdir}/m68k-palmos/include
+mv $RPM_BUILD_ROOT%{_libdir}/*.a $RPM_BUILD_ROOT%{_exec_prefix}/arm-palmos/lib
+mv $RPM_BUILD_ROOT%{_libdir}/mown-gp/*.a $RPM_BUILD_ROOT%{_exec_prefix}/m68k-palmos/lib
+mv $RPM_BUILD_ROOT%{_includedir}/* $RPM_BUILD_ROOT%{_exec_prefix}/m68k-palmos/include
 
 %clean
 rm -rf $RPM_BUILD_ROOT
