@@ -1,5 +1,5 @@
 Summary:	GCC and related tools for Palm OS development
-Summary(pl):	GCC i zwi±zane z nim narzêdzia do programowania pod Palm OS
+Summary(pl.UTF-8):   GCC i zwiÄ…zane z nim narzÄ™dzia do programowania pod Palm OS
 Name:		prc-tools
 Version:	2.3
 %define	bver	2.14
@@ -41,17 +41,17 @@ OS .prc files.
 You will also need a Palm OS SDK and some way of creating resources,
 such as PilRC.
 
-%description -l pl
-Kompletny zestaw narzêdzi kompilatora do budowania aplikacji pod Palm
+%description -l pl.UTF-8
+Kompletny zestaw narzÄ™dzi kompilatora do budowania aplikacji pod Palm
 OS w C lub C++. Zawiera zmodyfikowane wersje binutils %{bver}, GDB
-%{dver} i GCC %{cver}, wraz z ró¿nymi narzêdziami postkonsolidacyjnymi
-konsolidacji, aby stworzyæ pliki .prc dla Palm OS. Do tworzenia
-niektórych zasobów, takich jak PilRC, potrzebny jest jeszcze Palm OS
+%{dver} i GCC %{cver}, wraz z rÃ³Å¼nymi narzÄ™dziami postkonsolidacyjnymi
+konsolidacji, aby stworzyÄ‡ pliki .prc dla Palm OS. Do tworzenia
+niektÃ³rych zasobÃ³w, takich jak PilRC, potrzebny jest jeszcze Palm OS
 SDK.
 
 %package arm
 Summary:	GCC and related tools for ARM targeted Palm OS development
-Summary(pl):	GCC i zwi±zane z nim narzêdzia dla ARM do programowania pod Palm OS
+Summary(pl.UTF-8):   GCC i zwiÄ…zane z nim narzÄ™dzia dla ARM do programowania pod Palm OS
 Group:		Development/Tools
 Requires:	prc-tools >= 2.2
 
@@ -65,18 +65,18 @@ Note that this version of ARM prc-tools does not provide startup code
 or other niceties: by itself, it is only useful for building
 stand-alone code resources such as armlets.
 
-%description arm -l pl
-Zestaw narzêdzi kompilatora do budowania armletów Palm OS w C lub C++.
+%description arm -l pl.UTF-8
+Zestaw narzÄ™dzi kompilatora do budowania armletÃ³w Palm OS w C lub C++.
 Zawiera zmodyfikowane wersje binutils %{bver} i GCC %{cver}, a wymaga
-ró¿nych narzêdzi postkonsolidacyjnych z pakietu prc-tools.
+rÃ³Å¼nych narzÄ™dzi postkonsolidacyjnych z pakietu prc-tools.
 
-Ta wersja narzêdzi ARM prc-tools nie dostarcza kodu startowego ani
-innych subtelno¶ci - jako taka jest przydatna tylko do budowania
-samodzielnych zasobów kodu, takich jak armlety.
+Ta wersja narzÄ™dzi ARM prc-tools nie dostarcza kodu startowego ani
+innych subtelnoÅ›ci - jako taka jest przydatna tylko do budowania
+samodzielnych zasobÃ³w kodu, takich jak armlety.
 
 %package htmldocs
 Summary:	GCC, GDB, binutils, make, and prc-tools documentation as HTML
-Summary(pl):	Dokumentacja GCC, GDB, binutils, make i prc-tools w HTML
+Summary(pl.UTF-8):   Dokumentacja GCC, GDB, binutils, make i prc-tools w HTML
 Group:		Development/Tools
 
 %description htmldocs
@@ -86,11 +86,11 @@ package, respectively, provide exactly this documentation in info
 format. This optional package is for those who prefer HTML-formatted
 documentation.
 
-%description htmldocs -l pl
-Dokumentacja do GCC, GDB, binutils, make i ogólna dla prc-tools w
-formacie HTML. Ró¿ne pakiety do natywnego programowania oraz g³ówny
-pakiet prc-tools udostêpniaj± tê sam± dokumentacjê w formacie info.
-Ten opcjonalny pakiet jest dla preferuj±cych dokumentacjê w formacie
+%description htmldocs -l pl.UTF-8
+Dokumentacja do GCC, GDB, binutils, make i ogÃ³lna dla prc-tools w
+formacie HTML. RÃ³Å¼ne pakiety do natywnego programowania oraz gÅ‚Ã³wny
+pakiet prc-tools udostÄ™pniajÄ… tÄ™ samÄ… dokumentacjÄ™ w formacie info.
+Ten opcjonalny pakiet jest dla preferujÄ…cych dokumentacjÄ™ w formacie
 HTML.
 
 %prep
