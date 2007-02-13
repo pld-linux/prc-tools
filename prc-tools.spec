@@ -1,5 +1,5 @@
 Summary:	GCC and related tools for Palm OS development
-Summary(pl.UTF-8):   GCC i związane z nim narzędzia do programowania pod Palm OS
+Summary(pl.UTF-8):	GCC i związane z nim narzędzia do programowania pod Palm OS
 Name:		prc-tools
 Version:	2.3
 %define	bver	2.14
@@ -51,7 +51,7 @@ SDK.
 
 %package arm
 Summary:	GCC and related tools for ARM targeted Palm OS development
-Summary(pl.UTF-8):   GCC i związane z nim narzędzia dla ARM do programowania pod Palm OS
+Summary(pl.UTF-8):	GCC i związane z nim narzędzia dla ARM do programowania pod Palm OS
 Group:		Development/Tools
 Requires:	prc-tools >= 2.2
 
@@ -76,7 +76,7 @@ samodzielnych zasobów kodu, takich jak armlety.
 
 %package htmldocs
 Summary:	GCC, GDB, binutils, make, and prc-tools documentation as HTML
-Summary(pl.UTF-8):   Dokumentacja GCC, GDB, binutils, make i prc-tools w HTML
+Summary(pl.UTF-8):	Dokumentacja GCC, GDB, binutils, make i prc-tools w HTML
 Group:		Development/Tools
 
 %description htmldocs
