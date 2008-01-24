@@ -173,8 +173,8 @@ if [ "$1" = "0" ]; then
 	palmdev-prep --remove
 fi
 
-%postun
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir %{_infodir} >/dev/null 2>&1
+%postun	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %preun arm
 if [ "$1" = "0" ]; then
